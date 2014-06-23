@@ -24,7 +24,7 @@
 						{{ Form::select('program_1', $program, $student->program_1, array('class' => 'form-control')) }}
 					</div>
 					<div class="col-sm-6">
-						{{ Form::select('group_1', array('AGAMA' => 'AGAMA', 'IPA' => 'IPA', 'IPS' => 'IPS'), $student->program_1 != 'reguler' ?: $student->group_1, array($student->program_1 != 'reguler' ? 'disabled' : '', 'id' => 'group_1', 'class' => 'form-control')) }}
+						{{ Form::select('group_1', array('AGAMA' => 'AGAMA', 'IPA' => 'IPA', 'IPS' => 'IPS'), $student->program_1 != 'Reguler' ? null : $student->group_1, array($student->program_1 != 'Reguler' ? 'disabled' : '', 'id' => 'group_1', 'class' => 'form-control')) }}
 					</div>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 						{{ Form::select('program_2', $program, $student->program_2, array('class' => 'form-control')) }}
 					</div>
 					<div class="col-sm-6">
-						{{ Form::select('group_2', array('AGAMA' => 'AGAMA', 'IPA' => 'IPA', 'IPS' => 'IPS'), $student->program_2 != 'reguler' ?: $student->group_2, array($student->program_1 != 'reguler' ? 'disabled' : '', 'id' => 'group_2', 'class' => 'form-control')) }}
+						{{ Form::select('group_2', array('AGAMA' => 'AGAMA', 'IPA' => 'IPA', 'IPS' => 'IPS'), $student->program_2 != 'Reguler' ? null : $student->group_2, array($student->program_1 != 'Reguler' ? 'disabled' : '', 'id' => 'group_2', 'class' => 'form-control')) }}
 					</div>
 				</div>
 			</div>

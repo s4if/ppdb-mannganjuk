@@ -9,36 +9,35 @@
 <table class="table table-striped table-condensed">
 	<thead>
 		<tr>
-			<th>No.</th>
+			<th>No. Pendaftaran</th>
 			<th>Nama</th>
 			<th>Asal Sekolah</th>
 			<th>Nilai Raport</th>
 			<th>Nilai UN</th>
 			<th>Nilai Umum</th>
-			<th>Nilai Total</th>
-			<th>Saran</th>
 			<th>Aksi</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach( $students as $item )
 		<tr>
-			<td>{{ $item->id }}</td>
+			<td>{{ $item->reg_number }}</td>
 			<td>{{ $item->name }}</td>
 			<td>{{ $item->school_name }}</td>
 			@if( $item->score_total_1 >= $item->score_total_2 )
 			<td>{{ $item->score_raport_1 }}</td>
 			<td>{{ $item->score_un_1 }}</td>
 			<td>{{ $item->score_umum_1 }}</td>
-			<td>{{ $item->score_total_1 }}</td>
 			@else
 			<td>{{ $item->score_raport_2 }}</td>
 			<td>{{ $item->score_un_2 }}</td>
 			<td>{{ $item->score_umum_2 }}</td>
-			<td>{{ $item->score_total_2 }}</td>
 			@endif
-			<td>{{ $item->suggestion }}</td>
-			<td>{{ HTML::linkAction('StudentController@showDetail', 'Detail', array($item->id)) }} | {{ HTML::linkAction('StudentController@showEdit', 'Sunting', array($item->id)) }} | {{ HTML::linkAction('StudentController@deleteStudent', 'Hapus', array($item->id)) }}</td>
+			<td>
+				<a href="{{ action('StudentController@showDetail', array($item->id)) }}" title="Detail"><span class="glyphicon glyphicon-search"></span></a> | 
+				<a href="{{ action('StudentController@showEdit', array($item->id)) }}" title="Sunting"><span class="glyphicon glyphicon-edit"></span></a> | 
+				<a href="{{ action('StudentController@deleteStudent', array($item->id)) }}" title="Hapus"><span class="glyphicon glyphicon-trash"></span></a>
+			</td>
 		</tr>
 		@endforeach
 	</tbody>
