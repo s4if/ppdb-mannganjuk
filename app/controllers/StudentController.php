@@ -94,16 +94,24 @@ class StudentController extends BaseController
 			$data = array(
 				'name' => Input::get('name'),
 				'school_name' => Input::get('school_name'),
-				'akademik' => Input::get('akademik'),
+				'akademik_pai' => Input::get('akademik_pai'),
+				'akademik_bin' => Input::get('akademik_bin'),
+				'akademik_big' => Input::get('akademik_big'),
+				'akademik_mtk' => Input::get('akademik_mtk'),
+				'akademik_ipa' => Input::get('akademik_ipa'),
+				'akademik_ips' => Input::get('akademik_ips'),
 				'bta' => Input::get('bta'),
-				'iq' => Input::get('iq'),
 			);
 			$rules = array(
 				'name' => 'required',
 				'school_name' => 'required',
-				'akademik' => 'numeric|min:0|max:100',
+				'akademik_pai' => 'numeric|min:0|max:15',
+				'akademik_bin' => 'numeric|min:0|max:10',
+				'akademik_big' => 'numeric|min:0|max:10',
+				'akademik_mtk' => 'numeric|min:0|max:10',
+				'akademik_ipa' => 'numeric|min:0|max:10',
+				'akademik_ips' => 'numeric|min:0|max:15',
 				'bta' => 'numeric|min:0|max:100',
-				'iq' => 'numeric|min:0|max:300',
 			);
 			$val = Validator::make($data, $rules);
 
@@ -126,9 +134,13 @@ class StudentController extends BaseController
 				$un_big = is_null(Input::get('un_big')) ? 0 : round(Input::get('un_big'));
 				$un_mtk = is_null(Input::get('un_mtk')) ? 0 : round(Input::get('un_mtk'));
 				$un_ipa = is_null(Input::get('un_ipa')) ? 0 : round(Input::get('un_ipa'));
-				$akademik = is_null(Input::get('akademik')) ? 0 : round(Input::get('akademik')/10);
+				$akademik_pai = is_null(Input::get('akademik_pai')) ? 0 : round((Input::get('akademik_pai')/15)*10);
+				$akademik_bin = is_null(Input::get('akademik_bin')) ? 0 : round((Input::get('akademik_bin')/10)*10);
+				$akademik_big = is_null(Input::get('akademik_big')) ? 0 : round((Input::get('akademik_big')/10)*10);
+				$akademik_mtk = is_null(Input::get('akademik_mtk')) ? 0 : round((Input::get('akademik_mtk')/10)*10);
+				$akademik_ipa = is_null(Input::get('akademik_ipa')) ? 0 : round((Input::get('akademik_ipa')/10)*10);
+				$akademik_ips = is_null(Input::get('akademik_ips')) ? 0 : round((Input::get('akademik_ips')/15)*10);
 				$bta = is_null(Input::get('bta')) ? 0 : round(Input::get('bta')/10);
-				$iq = is_null(Input::get('iq')) ? 0 : $this->hitungIQ(Input::get('iq'));
 
 				// Data yang akan disimpan
 				$peserta->name = Input::get('name');
@@ -149,9 +161,22 @@ class StudentController extends BaseController
 				$peserta->un_big = Input::get('un_big');
 				$peserta->un_mtk = Input::get('un_mtk');
 				$peserta->un_ipa = Input::get('un_ipa');
-				$peserta->akademik = Input::get('akademik');
+				$peserta->un_avg = $this->hitungRata2UN(Input::get('un_bin'), Input::get('un_big'), Input::get('un_mtk'), Input::get('un_ipa'));
+				$peserta->tes_pai = Input::get('akademik_pai');
+				$peserta->tes_bin = Input::get('akademik_bin');
+				$peserta->tes_big = Input::get('akademik_big');
+				$peserta->tes_mtk = Input::get('akademik_mtk');
+				$peserta->tes_ipa = Input::get('akademik_ipa');
+				$peserta->tes_ips = Input::get('akademik_ips');
+				$peserta->tes_ips = Input::get('akademik_ips');
+				$peserta->akademik_pai = (Input::get('akademik_pai')/15)*10;
+				$peserta->akademik_bin = (Input::get('akademik_bin')/10)*10;
+				$peserta->akademik_big = (Input::get('akademik_big')/10)*10;
+				$peserta->akademik_mtk = (Input::get('akademik_mtk')/10)*10;
+				$peserta->akademik_ipa = (Input::get('akademik_ipa')/10)*10;
+				$peserta->akademik_ips = (Input::get('akademik_ips')/15)*10;
+				$peserta->akademik_avg = $this->hitungRata2Akademik($akademik_pai, $akademik_bin, $akademik_big, $akademik_mtk, $akademik_ipa, $akademik_ips);
 				$peserta->bta = Input::get('bta');
-				$peserta->iq = Input::get('iq');
 
 				// Siapkan nilai-nilai untuk dihitung
 				$nilai = array(
@@ -165,9 +190,13 @@ class StudentController extends BaseController
 					'un_big' => $un_big,
 					'un_mtk' => $un_mtk,
 					'un_ipa' => $un_ipa,
-					'akademik' => $akademik,
+					'akademik_pai' => $akademik_pai,
+					'akademik_bin' => $akademik_bin,
+					'akademik_big' => $akademik_big,
+					'akademik_mtk' => $akademik_mtk,
+					'akademik_ipa' => $akademik_ipa,
+					'akademik_ips' => $akademik_ips,
 					'bta' => $bta,
-					'iq' => $iq,
 				);
 
 				// Hitung nilai dengan Profile Matching
@@ -277,6 +306,7 @@ class StudentController extends BaseController
 			$peserta->un_big = Input::get('un_big');
 			$peserta->un_mtk = Input::get('un_mtk');
 			$peserta->un_ipa = Input::get('un_ipa');
+			$peserta->un_avg = $this->hitungRata2UN(Input::get('un_bin'), Input::get('un_big'), Input::get('un_mtk'), Input::get('un_ipa'));
 
 			// Siapkan nilai-nilai untuk dihitung
 			$nilai = array(
@@ -290,9 +320,13 @@ class StudentController extends BaseController
 				'un_big' => $un_big,
 				'un_mtk' => $un_mtk,
 				'un_ipa' => $un_ipa,
-				'akademik' => 0,
+				'akademik_pai' => 0,
+				'akademik_bin' => 0,
+				'akademik_big' => 0,
+				'akademik_mtk' => 0,
+				'akademik_ipa' => 0,
+				'akademik_ips' => 0,
 				'bta' => 0,
-				'iq' => 0,
 			);
 
 			// Hitung nilai dengan Profile Matching
@@ -468,6 +502,36 @@ class StudentController extends BaseController
 	}
 
 	/**
+	 * Hitung nilai rata-rata UN.
+	 *
+	 * @param float $bin
+	 * @param float $big
+	 * @param float $mtk
+	 * @param float $ipa
+	 * @return float
+	 */
+	public function hitungRata2UN($bin, $big, $mtk, $ipa)
+	{
+		return ($bin+$big+$mtk+$ipa)/4;
+	}
+
+	/**
+	 * Hitung nilai rata-rata raport.
+	 *
+	 * @param float $pai
+	 * @param float $bin
+	 * @param float $big
+	 * @param float $mtk
+	 * @param float $ipa
+	 * @param float $ips
+	 * @return float
+	 */
+	public function hitungRata2Akademik($pai, $bin, $big, $mtk, $ipa, $ips)
+	{
+		return ($pai+$bin+$big+$mtk+$ipa+$ips)/6;
+	}
+
+	/**
 	 * Hasilkan Kode No. Pendaftaran.
 	 *
 	 * @param string $program
@@ -539,7 +603,7 @@ class StudentController extends BaseController
 		$gap = array();
 
 		$profil_ideal = DB::table('groups')
-			->select('raport_pai', 'raport_bin', 'raport_big', 'raport_mtk', 'raport_ipa', 'raport_ips', 'un_bin', 'un_big', 'un_mtk', 'un_ipa', 'akademik', 'bta', 'iq')
+			->select('raport_pai', 'raport_bin', 'raport_big', 'raport_mtk', 'raport_ipa', 'raport_ips', 'un_bin', 'un_big', 'un_mtk', 'un_ipa', 'akademik_pai', 'akademik_bin', 'akademik_big', 'akademik_mtk', 'akademik_ipa', 'akademik_ips', 'bta', 'iq')
 			->where('name', $minat)
 			->first();
 
@@ -555,9 +619,14 @@ class StudentController extends BaseController
 		$gap[] = $nilai['un_mtk'] - $profil_ideal->un_mtk;
 		$gap[] = $nilai['un_ipa'] - $profil_ideal->un_ipa;
 
-		$gap[] = $nilai['akademik'] - $profil_ideal->akademik;
+		$gap[] = $nilai['akademik_pai'] - $profil_ideal->akademik_pai;
+		$gap[] = $nilai['akademik_bin'] - $profil_ideal->akademik_bin;
+		$gap[] = $nilai['akademik_big'] - $profil_ideal->akademik_big;
+		$gap[] = $nilai['akademik_mtk'] - $profil_ideal->akademik_mtk;
+		$gap[] = $nilai['akademik_ipa'] - $profil_ideal->akademik_ipa;
+		$gap[] = $nilai['akademik_ips'] - $profil_ideal->akademik_ips;
+
 		$gap[] = $nilai['bta'] - $profil_ideal->bta;
-		$gap[] = $nilai['iq'] - $profil_ideal->iq;
 
 		return $gap;
 	}
@@ -572,7 +641,7 @@ class StudentController extends BaseController
 	{
 		$bobot = array();
 
-		for ($i=0; $i < 13; $i++)
+		for ($i=0; $i < 17; $i++)
 		{ 
 			switch ($nilai[$i]) {
 				case 0:
@@ -681,15 +750,19 @@ class StudentController extends BaseController
 				$kriteria['un'] = $nilai_un;
 
 				$umum_core = array(
-					'akademik' => $nilai[10],
-					'bta' => $nilai[11],
+					'pai' => $nilai[10],
+					'bin' => $nilai[11],
+					'big' => $nilai[12],
+					'mtk' => $nilai[13],
+					'bta' => $nilai[16],
 				);
 				$jml_umum_core = count($umum_core);
 				$total_umum_core = array_sum($umum_core);
 				$ncf_umum = $total_umum_core/$jml_umum_core;
 
 				$umum_secondary = array(
-					'iq' => $nilai[12],
+					'ipa' => $nilai[14],
+					'ips' => $nilai[15],
 				);
 				$jml_umum_secondary = count($umum_secondary);
 				$total_umum_secondary = array_sum($umum_secondary);
@@ -743,15 +816,19 @@ class StudentController extends BaseController
 				$kriteria['un'] = $nilai_un;
 
 				$umum_core = array(
-					'akademik' => $nilai[10],
-					'bta' => $nilai[11],
+					'bin' => $nilai[11],
+					'big' => $nilai[12],
+					'mtk' => $nilai[13],
+					'ipa' => $nilai[14],
+					'bta' => $nilai[16],
 				);
 				$jml_umum_core = count($umum_core);
 				$total_umum_core = array_sum($umum_core);
 				$ncf_umum = $total_umum_core/$jml_umum_core;
 
 				$umum_secondary = array(
-					'iq' => $nilai[12],
+					'pai' => $nilai[10],
+					'ips' => $nilai[15],
 				);
 				$jml_umum_secondary = count($umum_secondary);
 				$total_umum_secondary = array_sum($umum_secondary);
@@ -805,15 +882,19 @@ class StudentController extends BaseController
 				$kriteria['un'] = $nilai_un;
 
 				$umum_core = array(
-					'akademik' => $nilai[10],
-					'bta' => $nilai[11],
+					'bin' => $nilai[11],
+					'big' => $nilai[12],
+					'mtk' => $nilai[13],
+					'ips' => $nilai[15],
+					'bta' => $nilai[16],
 				);
 				$jml_umum_core = count($umum_core);
 				$total_umum_core = array_sum($umum_core);
 				$ncf_umum = $total_umum_core/$jml_umum_core;
 
 				$umum_secondary = array(
-					'iq' => $nilai[12],
+					'pai' => $nilai[10],
+					'ipa' => $nilai[14],
 				);
 				$jml_umum_secondary = count($umum_secondary);
 				$total_umum_secondary = array_sum($umum_secondary);

@@ -45,45 +45,111 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-12">
-		<table class="table table-bordered table-condensed">
-			<thead>
-				<tr class="success">
-					<th class="text-center" colspan="6">Nilai Raport</th>
-					<th class="text-center" colspan="4">Nilai UN</th>
-					<th class="text-center" colspan="3">Nilai Kompetensi Umum</th>
+	<div class="col-sm-4">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Nilai Rata-rata Raport</h3>
+			</div>
+			<table class="table table-condensed table-striped">
+				<tr>
+					<td>Pend. Agama Islam</td>
+					<td>{{ $student->raport_pai }}</td>
 				</tr>
-				<tr class="success">
-					<th>P. Agama Islam</th>
-					<th>B. Indonesia</th>
-					<th>B. Inggris</th>
-					<th>Matematika</th>
-					<th>IPA</th>
-					<th>IPS</th>
-					<th>B. Indonesia</th>
-					<th>B. Inggris</th>
-					<th>Matematika</th>
-					<th>IPA</th>
-					<th>Tes Akademik</th>
+				<tr>
+					<td>Bahasa Indonesia</td>
+					<td>{{ $student->raport_bin }}</td>
+				</tr>
+				<tr>
+					<td>Bahasa Inggris</td>
+					<td>{{ $student->raport_big }}</td>
+				</tr>
+				<tr>
+					<td>Matematika</td>
+					<td>{{ $student->raport_mtk }}</td>
+				</tr>
+				<tr>
+					<td>Ilmu Pengetahuan Alam</td>
+					<td>{{ $student->raport_ipa }}</td>
+				</tr>
+				<tr>
+					<td>Ilmu Pengetahuan Sosial</td>
+					<td>{{ $student->raport_ips }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Nilai Ujian Nasional</h3>
+			</div>
+			<table class="table table-condensed table-striped">
+				<tr>
+					<td>Bahasa Indonesia</td>
+					<td>{{ $student->un_bin }}</td>
+				</tr>
+				<tr>
+					<td>Bahasa Inggris</td>
+					<td>{{ $student->un_big }}</td>
+				</tr>
+				<tr>
+					<td>Matematika</td>
+					<td>{{ $student->un_mtk }}</td>
+				</tr>
+				<tr>
+					<td>Ilmu Pengetahuan Alam</td>
+					<td>{{ $student->un_ipa }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Nilai Tes Akademik</h3>
+			</div>
+			<table class="table table-condensed table-striped">
+				<tr>
+					<td>Pend. Agama Islam</td>
+					<td>{{ $student->akademik_pai }}</td>
+				</tr>
+				<tr>
+					<td>Bahasa Indonesia</td>
+					<td>{{ $student->akademik_bin }}</td>
+				</tr>
+				<tr>
+					<td>Bahasa Inggris</td>
+					<td>{{ $student->akademik_big }}</td>
+				</tr>
+				<tr>
+					<td>Matematika</td>
+					<td>{{ $student->akademik_mtk }}</td>
+				</tr>
+				<tr>
+					<td>Ilmu Pengetahuan Alam</td>
+					<td>{{ $student->akademik_ipa }}</td>
+				</tr>
+				<tr>
+					<td>Ilmu Pengetahuan Sosial</td>
+					<td>{{ $student->akademik_ips }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>Total Tes Akademik</th>
 					<th>BTA</th>
-					<th>IQ</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>{{ $student->raport_pai }}</td>
-					<td>{{ $student->raport_bin }}</td>
-					<td>{{ $student->raport_big }}</td>
-					<td>{{ $student->raport_mtk }}</td>
-					<td>{{ $student->raport_ipa }}</td>
-					<td>{{ $student->raport_ips }}</td>
-					<td>{{ $student->un_bin }}</td>
-					<td>{{ $student->un_big }}</td>
-					<td>{{ $student->un_mtk }}</td>
-					<td>{{ $student->un_ipa }}</td>
-					<td>{{ $student->akademik }}</td>
+					<td>{{ $student->akademik_avg }}</td>
 					<td>{{ $student->bta }}</td>
-					<td>{{ $student->iq }}</td>
 				</tr>
 			</tbody>
 		</table>

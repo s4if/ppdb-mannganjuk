@@ -85,17 +85,36 @@
 			</div>
 		</fieldset>
 		<fieldset>
+			<legend>Nilai Tes Akademik</legend>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-2">
+						{{ Form::text('akademik_pai', $student->tes_pai, array('placeholder' => 'PAI', 'class' => 'form-control')) }}
+					</div>
+					<div class="col-sm-2">
+						{{ Form::text('akademik_bin', $student->tes_bin, array('placeholder' => 'BIN', 'class' => 'form-control')) }}
+					</div>
+					<div class="col-sm-2">
+						{{ Form::text('akademik_big', $student->tes_big, array('placeholder' => 'BIG', 'class' => 'form-control')) }}
+					</div>
+					<div class="col-sm-2">
+						{{ Form::text('akademik_mtk', $student->tes_mtk, array('placeholder' => 'MTK', 'class' => 'form-control')) }}
+					</div>
+					<div class="col-sm-2">
+						{{ Form::text('akademik_ipa', $student->tes_ipa, array('placeholder' => 'IPA', 'class' => 'form-control')) }}
+					</div>
+					<div class="col-sm-2">
+						{{ Form::text('akademik_ips', $student->tes_ips, array('placeholder' => 'IPS', 'class' => 'form-control')) }}
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
 			<legend>Nilai Kompetensi Umum</legend>
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-4">
-						{{ Form::text('akademik', $student->akademik, array('placeholder' => 'Tes Akademik', 'class' => 'form-control')) }}
-					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ Form::text('bta', $student->bta, array('placeholder' => 'BTA', 'class' => 'form-control')) }}
-					</div>
-					<div class="col-sm-4">
-						{{ Form::text('iq', $student->iq, array('placeholder' => 'IQ', 'class' => 'form-control')) }}
 					</div>
 				</div>
 			</div>

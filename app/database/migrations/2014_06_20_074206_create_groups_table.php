@@ -26,7 +26,12 @@ class CreateGroupsTable extends Migration {
 			$table->integer('un_big');
 			$table->integer('un_mtk');
 			$table->integer('un_ipa');
-			$table->integer('akademik');
+			$table->integer('akademik_pai');
+			$table->integer('akademik_bin');
+			$table->integer('akademik_big');
+			$table->integer('akademik_mtk');
+			$table->integer('akademik_ipa');
+			$table->integer('akademik_ips');
 			$table->integer('bta');
 			$table->integer('iq');
 		});
