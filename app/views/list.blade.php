@@ -9,6 +9,7 @@
 <table class="table table-striped table-condensed">
 	<thead>
 		<tr>
+			<th>No.</th>
 			<th>No. Pendaftaran</th>
 			<th>Nama</th>
 			<th>Asal Sekolah</th>
@@ -19,8 +20,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach( $students as $item )
+		<?php $no = 1; foreach ( $students as $item ): ?>
 		<tr>
+			<td>{{ $no }}</td>
 			<td>{{ $item->reg_number }}</td>
 			<td>{{ $item->name }}</td>
 			<td>{{ $item->school_name }}</td>
@@ -39,7 +41,7 @@
 				<a href="{{ action('StudentController@deleteStudent', array($item->id)) }}" title="Hapus"><span class="glyphicon glyphicon-trash"></span></a>
 			</td>
 		</tr>
-		@endforeach
+		<?php $no++; endforeach ?>
 	</tbody>
 </table>
 @endif
